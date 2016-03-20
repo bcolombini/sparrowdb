@@ -1,6 +1,9 @@
 #!/bin/bash
 
-export SPARROW_HOME=$(dirname $(dirname $(readlink -f "$0")))
+#export SPARROW_HOME=$(dirname $(dirname $(readlink -f "$0"))) 
+
+export SPARROW_HOME=$(pwd) #get currenty directory
+
 cd $SPARROW_HOME
 
 SPARROW_JAR=$SPARROW_HOME/target/sparrow-1.0-SNAPSHOT.jar
@@ -9,7 +12,7 @@ SIGAR_LIB=$SPARROW_HOME/sigar-bin
 SPARROW_MAIN=org.sparrow.service.SparrowDaemon
 
 function exec_sparrow {
-	eval $JAVA_HOME/bin/java -Djava.library.path="$SIGAR_LIB" -cp "'$SPARROW_JAR:$SPARROW_CLASSPATH'" $SPARROW_MAIN
+	eval java -Djava.library.path="$SIGAR_LIB" -cp "'$SPARROW_JAR:$SPARROW_CLASSPATH'" $SPARROW_MAIN
 }
 
 if [[ "$1" == "build" ]]; then
